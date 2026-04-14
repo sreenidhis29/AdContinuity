@@ -216,7 +216,55 @@
 
         .provider-pill.active {
             color: var(--text);
-            border-color: rgba(52, 211, 153, 0.3);
+            border-color: rgba(52, 211, 255, 0.3);
+        }
+
+        /* ── WARMUP INDICATOR ── */
+        .warmup-hint {
+            position: fixed;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(129, 140, 248, 0.1);
+            border: 1px solid var(--accent);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--accent);
+            display: none;
+            align-items: center;
+            gap: 12px;
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            animation: bounce-up 0.5s ease both;
+        }
+
+        .warmup-hint .pulse {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse-ring 1.5s infinite;
+        }
+
+        @keyframes bounce-up {
+            from {
+                opacity: 0;
+                transform: translate(-50%, 20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translate(-50%, 0);
+            }
+        }
+
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); opacity: 0.8; }
+            50% { transform: scale(1.2); opacity: 0.4; }
+            100% { transform: scale(0.8); opacity: 0.8; }
         }
 
         /* ── HERO ── */
@@ -1304,6 +1352,11 @@
         <div class="orb orb-3"></div>
     </div>
 
+    <div class="warmup-hint" id="warmupHint">
+        <div class="pulse"></div>
+        <span>⚡ Backend service is waking up (Render Free Tier)... Please wait 30s</span>
+    </div>
+
     <div class="page">
         <!-- HEADER -->
         <header class="site-header">
@@ -1642,6 +1695,14 @@
             try {
                 const r = await fetch(API + '/health');
                 const d = await r.json();
+
+                // Hide warmup hint if status is OK
+                if (d.status === 'ok') {
+                    document.getElementById('warmupHint').style.display = 'none';
+                } else {
+                    document.getElementById('warmupHint').style.display = 'flex';
+                }
+
                 (d.providers || []).forEach(p => {
                     const pill = document.getElementById('pill-' + p.id);
                     if (!pill) return;
@@ -1662,7 +1723,10 @@
                         pill.title = 'Not configured';
                     }
                 });
-            } catch { }
+            } catch (e) {
+                // Server likely sleeping
+                document.getElementById('warmupHint').style.display = 'flex';
+            }
         }
         refreshProviderStatus();
 
