@@ -11,6 +11,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap"
         rel="stylesheet">
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M16 4L4 28H8L16 12L24 28H28L16 4Z' fill='%23818cf8'/%3E%3Ccircle cx='16' cy='18' r='3' stroke='white' stroke-width='1.5'/%3E%3C/svg%3E">
     <style>
         :root {
             --bg: #030712;
@@ -146,10 +148,25 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             font-family: 'Syne', sans-serif;
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 800;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .logo:hover {
+            transform: scale(1.02);
+        }
+
+        .logo img, .logo svg {
+            width: 32px;
+            height: 32px;
+            filter: drop-shadow(0 0 8px var(--accent-glow));
+        }
+
+        .logo-text {
             background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -1292,7 +1309,22 @@
         <header class="site-header">
             <div class="header-inner">
                 <div class="logo">
-                    AdContinuity
+                    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16 4L4 28H8L16 12L24 28H28L16 4Z" fill="url(#logo-grad-1)" />
+                        <path d="M12 20H20V23H11L12 20Z" fill="url(#logo-grad-2)" />
+                        <circle cx="16" cy="18" r="3" stroke="white" stroke-width="1.5" stroke-dasharray="2 2" />
+                        <defs>
+                            <linearGradient id="logo-grad-1" x1="4" y1="4" x2="28" y2="28" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#818cf8" />
+                                <stop offset="1" stop-color="#a78bfa" />
+                            </linearGradient>
+                            <linearGradient id="logo-grad-2" x1="12" y1="20" x2="20" y2="23" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#fff" />
+                                <stop offset="1" stop-color="#818cf8" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <span class="logo-text">AdContinuity</span>
                     <span class="logo-badge">PIPELINE V2.0</span>
                 </div>
                 <div class="provider-pills" id="providerPills">
