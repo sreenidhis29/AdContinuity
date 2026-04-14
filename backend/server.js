@@ -58,6 +58,15 @@ app.get('/health', (_req, res) => {
   });
 });
 
+// Root route — prevents Railway health check restarts
+app.get('/', (_req, res) => {
+  res.json({
+    name: 'AdContinuity API',
+    version: '1.0.0',
+    status: 'active'
+  });
+});
+
 // Primary API route
 app.use('/api/personalize', require('./routes/personalize'));
 
