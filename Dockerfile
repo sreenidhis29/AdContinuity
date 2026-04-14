@@ -1,5 +1,5 @@
-# Use the official Playwright image that matches our package.json version
-FROM mcr.microsoft.com/playwright:v1.49.0-focal
+# Use the most stable Jammy-based Playwright image
+FROM mcr.microsoft.com/playwright:v1.49.1-jammy
 
 WORKDIR /app
 
@@ -9,17 +9,18 @@ COPY backend/package*.json ./
 # Install dependencies
 RUN npm install
 
-# Install the chromium browser specifically (even though image has it, this ensures the links are correct)
+# Ensure browsers are installed
 RUN npx playwright install chromium
 
 # Copy the source code
 COPY backend/ .
 
-# Ensure the app binds to 0.0.0.0 so Railway can reach it
+# Production Config
 ENV PORT=3001
+ENV NODE_ENV=production
 EXPOSE 3001
 
-# Clean up any cache to keep the image slim
+# Clean up
 RUN rm -rf /root/.cache
 
 CMD ["node", "server.js"]
