@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AdContinuity — AI Landing Page Personalizer</title>
-    <meta name="description" content="Transform any landing page with AI-powered personalization that matches your ad creative for maximum conversion.">
+    <meta name="description"
+        content="Transform any landing page with AI-powered personalization that matches your ad creative for maximum conversion.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --bg: #030712;
-            --surface: rgba(255,255,255,0.03);
-            --surface-2: rgba(255,255,255,0.06);
-            --border: rgba(255,255,255,0.08);
-            --border-2: rgba(255,255,255,0.12);
+            --surface: rgba(255, 255, 255, 0.03);
+            --surface-2: rgba(255, 255, 255, 0.06);
+            --border: rgba(255, 255, 255, 0.08);
+            --border-2: rgba(255, 255, 255, 0.12);
             --accent: #818cf8;
             --accent-2: #a78bfa;
-            --accent-glow: rgba(129,140,248,0.25);
+            --accent-glow: rgba(129, 140, 248, 0.25);
             --green: #34d399;
             --yellow: #fbbf24;
             --red: #f87171;
@@ -24,8 +28,19 @@
             --muted: #6b7280;
             --muted-2: #9ca3af;
         }
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             background: var(--bg);
             color: var(--text);
@@ -38,843 +53,1663 @@
 
         /* ── BACKGROUND ── */
         .bg-orbs {
-            position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
         }
+
         .orb {
-            position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.15;
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.15;
             animation: orb-float 20s ease-in-out infinite alternate;
         }
-        .orb-1 { width: 600px; height: 600px; background: #6366f1; top: -200px; left: -200px; }
-        .orb-2 { width: 500px; height: 500px; background: #8b5cf6; bottom: -150px; right: -150px; animation-delay: -10s; }
-        .orb-3 { width: 400px; height: 400px; background: #06b6d4; top: 40%; left: 30%; animation-delay: -5s; opacity: 0.08; }
-        @keyframes orb-float { from { transform: translate(0,0) scale(1); } to { transform: translate(40px, 60px) scale(1.1); } }
+
+        .orb-1 {
+            width: 600px;
+            height: 600px;
+            background: #6366f1;
+            top: -200px;
+            left: -200px;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: #8b5cf6;
+            bottom: -150px;
+            right: -150px;
+            animation-delay: -10s;
+        }
+
+        .orb-3 {
+            width: 400px;
+            height: 400px;
+            background: #06b6d4;
+            top: 40%;
+            left: 30%;
+            animation-delay: -5s;
+            opacity: 0.08;
+        }
+
+        @keyframes orb-float {
+            from {
+                transform: translate(0, 0) scale(1);
+            }
+
+            to {
+                transform: translate(40px, 60px) scale(1.1);
+            }
+        }
 
         /* ── LAYOUT ── */
-        .page { position: relative; z-index: 1; }
-        .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
-        .container-wide { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+        .page {
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .container-wide {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
 
         /* ── HEADER ── */
         .site-header {
             padding: 24px 0;
             border-bottom: 1px solid var(--border);
             backdrop-filter: blur(12px);
-            position: sticky; top: 0; z-index: 100;
+            position: sticky;
+            top: 0;
+            z-index: 100;
             background: rgba(3, 7, 18, 0.8);
         }
+
         .header-inner {
-            display: flex; align-items: center; justify-content: space-between;
-            max-width: 1080px; margin: 0 auto; padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 0 24px;
         }
+
         .logo {
-            display: flex; align-items: center; gap: 10px;
-            font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Syne', sans-serif;
+            font-size: 22px;
+            font-weight: 800;
             background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
+
         .logo-badge {
-            font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 700;
-            background: var(--accent-glow); border: 1px solid var(--accent);
-            color: var(--accent); padding: 2px 8px; border-radius: 20px;
+            font-family: 'Inter', sans-serif;
+            font-size: 10px;
+            font-weight: 700;
+            background: var(--accent-glow);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 2px 8px;
+            border-radius: 20px;
             -webkit-text-fill-color: var(--accent);
         }
+
         .provider-pills {
-            display: flex; gap: 8px; align-items: center;
+            display: flex;
+            gap: 8px;
+            align-items: center;
         }
+
         .provider-pill {
-            font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 20px;
-            border: 1px solid var(--border-2); color: var(--muted-2);
-            display: flex; align-items: center; gap: 5px;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 20px;
+            border: 1px solid var(--border-2);
+            color: var(--muted-2);
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
-        .provider-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); }
-        .provider-pill.active .dot { background: var(--green); box-shadow: 0 0 6px var(--green); }
-        .provider-pill.active { color: var(--text); border-color: rgba(52,211,153,0.3); }
+
+        .provider-pill .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--muted);
+        }
+
+        .provider-pill.active .dot {
+            background: var(--green);
+            box-shadow: 0 0 6px var(--green);
+        }
+
+        .provider-pill.active {
+            color: var(--text);
+            border-color: rgba(52, 211, 153, 0.3);
+        }
 
         /* ── HERO ── */
         .hero {
-            text-align: center; padding: 80px 0 60px;
+            text-align: center;
+            padding: 80px 0 60px;
         }
+
         .hero-tag {
-            display: inline-flex; align-items: center; gap: 8px;
-            background: var(--surface-2); border: 1px solid var(--border-2);
-            padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 600;
-            color: var(--accent); margin-bottom: 28px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--surface-2);
+            border: 1px solid var(--border-2);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 28px;
             animation: fade-down 0.6s ease both;
         }
-        .hero-tag::before { content: '✦'; }
+
+        .hero-tag::before {
+            content: '✦';
+        }
+
         .hero h1 {
-            font-family: 'Syne', sans-serif; font-size: clamp(40px, 7vw, 68px);
-            font-weight: 800; line-height: 1.05; letter-spacing: -0.03em;
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(40px, 7vw, 68px);
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
             margin-bottom: 20px;
             animation: fade-up 0.7s ease 0.1s both;
         }
+
         .hero h1 span {
             background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 60%, #e879f9 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
+
         .hero-sub {
-            font-size: 19px; color: var(--muted-2); max-width: 560px; margin: 0 auto 40px;
+            font-size: 19px;
+            color: var(--muted-2);
+            max-width: 560px;
+            margin: 0 auto 40px;
             animation: fade-up 0.7s ease 0.2s both;
         }
 
         /* ── MAIN CARD ── */
         .main-card {
-            background: var(--surface); border: 1px solid var(--border);
-            border-radius: 24px; padding: 40px;
-            box-shadow: 0 0 0 1px rgba(255,255,255,0.03) inset, 0 32px 64px -16px rgba(0,0,0,0.6);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.03) inset, 0 32px 64px -16px rgba(0, 0, 0, 0.6);
             margin-bottom: 32px;
             animation: fade-up 0.7s ease 0.3s both;
         }
 
         /* ── TABS ── */
         .tab-nav {
-            display: flex; background: rgba(0,0,0,0.3); border-radius: 10px;
-            padding: 3px; gap: 2px; width: fit-content; margin-bottom: 20px;
+            display: flex;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 3px;
+            gap: 2px;
+            width: fit-content;
+            margin-bottom: 20px;
         }
+
         .tab-btn {
-            background: none; border: none; color: var(--muted); padding: 7px 16px;
-            border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s;
+            background: none;
+            border: none;
+            color: var(--muted);
+            padding: 7px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
         }
-        .tab-btn.active { background: var(--surface-2); color: var(--text); }
+
+        .tab-btn.active {
+            background: var(--surface-2);
+            color: var(--text);
+        }
 
         /* ── FORM CONTROLS ── */
-        .field { margin-bottom: 28px; }
+        .field {
+            margin-bottom: 28px;
+        }
+
         .field-label {
-            font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
-            color: var(--muted); margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--muted);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
+
         .field-label .num {
-            width: 20px; height: 20px; border-radius: 50%; background: var(--accent-glow);
-            border: 1px solid var(--accent); color: var(--accent); font-size: 10px;
-            display: flex; align-items: center; justify-content: center;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--accent-glow);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .input, textarea {
-            width: 100%; background: rgba(0,0,0,0.25); border: 1px solid var(--border-2);
-            border-radius: 12px; padding: 14px 18px; color: var(--text);
-            font-family: 'Inter', sans-serif; font-size: 15px; transition: all 0.2s; resize: none;
+
+        .input,
+        textarea {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid var(--border-2);
+            border-radius: 12px;
+            padding: 14px 18px;
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            transition: all 0.2s;
+            resize: none;
         }
-        textarea { min-height: 110px; }
-        .input:focus, textarea:focus {
-            outline: none; border-color: var(--accent);
+
+        textarea {
+            min-height: 110px;
+        }
+
+        .input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent);
             box-shadow: 0 0 0 3px var(--accent-glow);
-            background: rgba(0,0,0,0.35);
+            background: rgba(0, 0, 0, 0.35);
         }
+
         .drop-zone {
-            border: 2px dashed var(--border-2); border-radius: 14px; padding: 36px;
-            text-align: center; cursor: pointer; transition: all 0.25s; color: var(--muted);
+            border: 2px dashed var(--border-2);
+            border-radius: 14px;
+            padding: 36px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.25s;
+            color: var(--muted);
         }
-        .drop-zone:hover, .drop-zone.over {
-            border-color: var(--accent); background: rgba(129,140,248,0.05); color: var(--text);
+
+        .drop-zone:hover,
+        .drop-zone.over {
+            border-color: var(--accent);
+            background: rgba(129, 140, 248, 0.05);
+            color: var(--text);
         }
-        .drop-icon { font-size: 32px; margin-bottom: 10px; }
+
+        .drop-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
         #adImageThumb {
-            max-width: 160px; border-radius: 10px; margin: 16px auto 0;
-            display: none; border: 2px solid var(--border-2);
+            max-width: 160px;
+            border-radius: 10px;
+            margin: 16px auto 0;
+            display: none;
+            border: 2px solid var(--border-2);
         }
-        .err-hint { color: var(--red); font-size: 12px; margin-top: 6px; min-height: 16px; }
+
+        .err-hint {
+            color: var(--red);
+            font-size: 12px;
+            margin-top: 6px;
+            min-height: 16px;
+        }
 
         /* ── SUBMIT BUTTON ── */
         .cta-submit {
-            width: 100%; background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-            color: white; border: none; padding: 18px 32px; border-radius: 14px;
-            font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.25s;
-            display: flex; align-items: center; justify-content: center; gap: 12px;
-            box-shadow: 0 8px 32px -4px rgba(99,102,241,0.5);
+            width: 100%;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: white;
+            border: none;
+            padding: 18px 32px;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            box-shadow: 0 8px 32px -4px rgba(99, 102, 241, 0.5);
         }
+
         .cta-submit:hover:not(:disabled) {
-            transform: translateY(-2px); box-shadow: 0 16px 40px -4px rgba(99,102,241,0.6);
+            transform: translateY(-2px);
+            box-shadow: 0 16px 40px -4px rgba(99, 102, 241, 0.6);
         }
-        .cta-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
+
+        .cta-submit:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
         .cta-submit .spinner {
-            width: 20px; height: 20px; border: 2px solid rgba(255,255,255,0.3);
-            border-top-color: white; border-radius: 50%; animation: spin 0.7s linear infinite;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
         }
-        @keyframes spin { to { transform: rotate(360deg); } }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
 
         /* ── PROGRESS TRACKER ── */
         .tracker {
-            display: flex; justify-content: center; gap: 0; margin-top: 28px;
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            margin-top: 28px;
             position: relative;
         }
+
         .tracker::before {
-            content: ''; position: absolute; top: 16px; left: 15%; right: 15%;
-            height: 1px; background: var(--border-2); z-index: 0;
+            content: '';
+            position: absolute;
+            top: 16px;
+            left: 15%;
+            right: 15%;
+            height: 1px;
+            background: var(--border-2);
+            z-index: 0;
         }
+
         .track-step {
-            display: flex; flex-direction: column; align-items: center; gap: 8px;
-            flex: 1; position: relative; z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+            position: relative;
+            z-index: 1;
         }
+
         .track-dot {
-            width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--border-2);
-            background: var(--bg); display: flex; align-items: center; justify-content: center;
-            font-size: 13px; transition: all 0.3s;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid var(--border-2);
+            background: var(--bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            transition: all 0.3s;
         }
-        .track-label { font-size: 11px; font-weight: 600; color: var(--muted); transition: color 0.3s; }
+
+        .track-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--muted);
+            transition: color 0.3s;
+        }
+
         .track-step.active .track-dot {
-            border-color: var(--accent); background: var(--accent-glow);
-            box-shadow: 0 0 20px var(--accent-glow); animation: pulse-dot 1.5s ease infinite;
+            border-color: var(--accent);
+            background: var(--accent-glow);
+            box-shadow: 0 0 20px var(--accent-glow);
+            animation: pulse-dot 1.5s ease infinite;
         }
-        .track-step.active .track-label { color: var(--accent); }
-        .track-step.done .track-dot { border-color: var(--green); background: rgba(52,211,153,0.1); }
-        .track-step.done .track-label { color: var(--green); }
-        @keyframes pulse-dot { 0%,100% { box-shadow: 0 0 8px var(--accent-glow); } 50% { box-shadow: 0 0 24px var(--accent-glow), 0 0 48px var(--accent-glow); } }
+
+        .track-step.active .track-label {
+            color: var(--accent);
+        }
+
+        .track-step.done .track-dot {
+            border-color: var(--green);
+            background: rgba(52, 211, 153, 0.1);
+        }
+
+        .track-step.done .track-label {
+            color: var(--green);
+        }
+
+        @keyframes pulse-dot {
+
+            0%,
+            100% {
+                box-shadow: 0 0 8px var(--accent-glow);
+            }
+
+            50% {
+                box-shadow: 0 0 24px var(--accent-glow), 0 0 48px var(--accent-glow);
+            }
+        }
 
         /* ═══════════════════════════════════════════════════════
            ── RESULTS SECTION ──
            ═══════════════════════════════════════════════════════ */
-        #results { display: none; }
+        #results {
+            display: none;
+        }
 
         /* Success banner */
         .result-banner {
-            display: flex; align-items: center; gap: 12px;
-            padding: 14px 20px; border-radius: 12px; margin-bottom: 28px;
-            font-weight: 600; font-size: 14px; border: 1px solid;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 20px;
+            border-radius: 12px;
+            margin-bottom: 28px;
+            font-weight: 600;
+            font-size: 14px;
+            border: 1px solid;
         }
-        .result-banner.success { background: rgba(52,211,153,0.08); border-color: rgba(52,211,153,0.25); color: var(--green); }
-        .result-banner.partial { background: rgba(251,191,36,0.08); border-color: rgba(251,191,36,0.25); color: var(--yellow); }
+
+        .result-banner.success {
+            background: rgba(52, 211, 153, 0.08);
+            border-color: rgba(52, 211, 153, 0.25);
+            color: var(--green);
+        }
+
+        .result-banner.partial {
+            background: rgba(251, 191, 36, 0.08);
+            border-color: rgba(251, 191, 36, 0.25);
+            color: var(--yellow);
+        }
 
         /* Metrics Row */
         .metrics-row {
-            display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 36px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 36px;
         }
+
         .metric {
-            background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
-            padding: 20px; text-align: center; position: relative; overflow: hidden;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
             transition: transform 0.2s;
         }
-        .metric:hover { transform: translateY(-3px); }
-        .metric::after {
-            content: ''; position: absolute; inset: 0; border-radius: 16px;
-            background: radial-gradient(circle at top, var(--accent-glow) 0%, transparent 70%);
-            opacity: 0; transition: opacity 0.3s;
+
+        .metric:hover {
+            transform: translateY(-3px);
         }
-        .metric:hover::after { opacity: 1; }
-        .metric-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 8px; }
-        .metric-value { font-size: 36px; font-weight: 800; font-family: 'Syne', sans-serif; line-height: 1; }
-        .metric-delta { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 6px; margin-top: 6px; }
-        .metric-delta.up { background: rgba(52,211,153,0.15); color: var(--green); }
-        .metric-delta.neutral { background: var(--surface-2); color: var(--muted-2); }
+
+        .metric::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 16px;
+            background: radial-gradient(circle at top, var(--accent-glow) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .metric:hover::after {
+            opacity: 1;
+        }
+
+        .metric-label {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--muted);
+            margin-bottom: 8px;
+        }
+
+        .metric-value {
+            font-size: 36px;
+            font-weight: 800;
+            font-family: 'Syne', sans-serif;
+            line-height: 1;
+        }
+
+        .metric-delta {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 6px;
+            margin-top: 6px;
+        }
+
+        .metric-delta.up {
+            background: rgba(52, 211, 153, 0.15);
+            color: var(--green);
+        }
+
+        .metric-delta.neutral {
+            background: var(--surface-2);
+            color: var(--muted-2);
+        }
 
         /* Result Tabs */
-        .result-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 32px; overflow-x: auto; }
-        .r-tab {
-            background: none; border: none; color: var(--muted); padding: 12px 20px; font-size: 13px;
-            font-weight: 600; cursor: pointer; border-bottom: 2px solid transparent;
-            transition: all 0.2s; white-space: nowrap; font-family: 'Inter', sans-serif;
+        .result-tabs {
+            display: flex;
+            gap: 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 32px;
+            overflow-x: auto;
         }
-        .r-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
-        .r-tab:hover:not(.active) { color: var(--muted-2); }
-        .r-pane { display: none; }
-        .r-pane.active { display: block; }
+
+        .r-tab {
+            background: none;
+            border: none;
+            color: var(--muted);
+            padding: 12px 20px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+            white-space: nowrap;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .r-tab.active {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+
+        .r-tab:hover:not(.active) {
+            color: var(--muted-2);
+        }
+
+        .r-pane {
+            display: none;
+        }
+
+        .r-pane.active {
+            display: block;
+        }
 
         /* ── PERSONALIZED PAGE PREVIEW ── */
         .preview-wrap {
-            border-radius: 20px; overflow: hidden;
-            box-shadow: 0 0 0 1px var(--border), 0 32px 80px -16px rgba(0,0,0,0.8);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 0 0 1px var(--border), 0 32px 80px -16px rgba(0, 0, 0, 0.8);
         }
+
         .browser-chrome {
-            background: #1a1a2e; padding: 12px 16px;
-            display: flex; align-items: center; gap: 8px;
+            background: #1a1a2e;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-        .b-dots { display: flex; gap: 6px; }
-        .b-dot { width: 12px; height: 12px; border-radius: 50%; }
-        .b-close { background: #ff5f57; } .b-min { background: #febc2e; } .b-max { background: #28c840; }
+
+        .b-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .b-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .b-close {
+            background: #ff5f57;
+        }
+
+        .b-min {
+            background: #febc2e;
+        }
+
+        .b-max {
+            background: #28c840;
+        }
+
         .b-url {
-            flex: 1; background: rgba(255,255,255,0.06); border-radius: 6px;
-            padding: 5px 14px; font-size: 12px; color: var(--muted-2); margin: 0 16px;
+            flex: 1;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 6px;
+            padding: 5px 14px;
+            font-size: 12px;
+            color: var(--muted-2);
+            margin: 0 16px;
         }
+
         .before-after-toggle {
-            display: flex; background: rgba(255,255,255,0.04); border-radius: 8px; padding: 3px; gap: 2px;
+            display: flex;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 8px;
+            padding: 3px;
+            gap: 2px;
         }
+
         .ba-btn {
-            background: none; border: none; color: var(--muted); font-size: 11px; font-weight: 600;
-            padding: 4px 12px; border-radius: 6px; cursor: pointer; transition: all 0.2s; font-family: 'Inter', sans-serif;
+            background: none;
+            border: none;
+            color: var(--muted);
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
         }
-        .ba-btn.active { background: var(--accent); color: white; }
+
+        .ba-btn.active {
+            background: var(--accent);
+            color: white;
+        }
 
         /* The personalized page body */
         .lp-frame {
-            background: #fff; min-height: 600px; color: #111827; padding: 0;
-            position: relative; overflow: hidden;
+            background: #fff;
+            min-height: 600px;
+            color: #111827;
+            padding: 0;
+            position: relative;
+            overflow: hidden;
         }
+
         .lp-nav {
-            background: #fff; border-bottom: 1px solid #e5e7eb; padding: 16px 40px;
-            display: flex; align-items: center; justify-content: space-between;
-            font-size: 14px; font-weight: 600; position: sticky; top: 0;
+            background: #fff;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 16px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 14px;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
         }
-        .lp-logo { font-size: 18px; font-weight: 800; color: #111827; }
+
+        .lp-logo {
+            font-size: 18px;
+            font-weight: 800;
+            color: #111827;
+        }
+
         .lp-nav-cta {
-            padding: 8px 20px; border-radius: 8px; font-weight: 700; font-size: 13px;
-            color: white; border: none; cursor: default;
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 13px;
+            color: white;
+            border: none;
+            cursor: default;
             transition: transform 0.1s;
         }
+
         .lp-hero {
-            padding: 80px 40px 60px; text-align: center;
-            background: linear-gradient(180deg, rgba(0,0,0,0.02) 0%, transparent 100%);
+            padding: 80px 40px 60px;
+            text-align: center;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.02) 0%, transparent 100%);
         }
+
         .lp-h1 {
-            font-size: clamp(28px, 5vw, 52px); font-weight: 800; line-height: 1.1;
-            letter-spacing: -0.025em; margin-bottom: 16px; color: #111827;
+            font-size: clamp(28px, 5vw, 52px);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.025em;
+            margin-bottom: 16px;
+            color: #111827;
         }
-        .lp-subhead { font-size: 18px; color: #6b7280; max-width: 580px; margin: 0 auto 32px; line-height: 1.55; }
+
+        .lp-subhead {
+            font-size: 18px;
+            color: #6b7280;
+            max-width: 580px;
+            margin: 0 auto 32px;
+            line-height: 1.55;
+        }
+
         .lp-cta-btn {
-            display: inline-block; padding: 16px 40px; border-radius: 12px;
-            font-size: 16px; font-weight: 700; color: white; cursor: default;
-            box-shadow: 0 8px 24px -4px rgba(0,0,0,0.3); border: none;
+            display: inline-block;
+            padding: 16px 40px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            color: white;
+            cursor: default;
+            box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.3);
+            border: none;
         }
-        .lp-trust { margin-top: 20px; font-size: 13px; color: #9ca3af; }
+
+        .lp-trust {
+            margin-top: 20px;
+            font-size: 13px;
+            color: #9ca3af;
+        }
+
         .lp-features {
-            display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
-            padding: 0 40px 60px; max-width: 800px; margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            padding: 0 40px 60px;
+            max-width: 800px;
+            margin: 0 auto;
         }
+
         .lp-feat {
-            background: #f9fafb; padding: 24px; border-radius: 14px;
-            border: 1px solid #e5e7eb; transition: box-shadow 0.2s;
+            background: #f9fafb;
+            padding: 24px;
+            border-radius: 14px;
+            border: 1px solid #e5e7eb;
+            transition: box-shadow 0.2s;
             position: relative;
         }
-        .lp-feat h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; color: #111827; }
-        .lp-feat p { font-size: 14px; color: #6b7280; line-height: 1.5; }
+
+        .lp-feat h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #111827;
+        }
+
+        .lp-feat p {
+            font-size: 14px;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+
         .lp-social {
-            background: #f3f4f6; padding: 40px; text-align: center;
+            background: #f3f4f6;
+            padding: 40px;
+            text-align: center;
         }
+
         .lp-quote {
-            font-size: 17px; font-style: italic; color: #374151; max-width: 600px;
-            margin: 0 auto 16px; line-height: 1.6;
+            font-size: 17px;
+            font-style: italic;
+            color: #374151;
+            max-width: 600px;
+            margin: 0 auto 16px;
+            line-height: 1.6;
         }
-        .lp-quote-author { font-size: 13px; font-weight: 600; color: #6b7280; }
+
+        .lp-quote-author {
+            font-size: 13px;
+            font-weight: 600;
+            color: #6b7280;
+        }
 
         /* Personalized glow overlay on changed sections */
         .personalized-glow {
-            position: relative; animation: entrance 0.5s ease both;
+            position: relative;
+            animation: entrance 0.5s ease both;
         }
+
         .personalized-glow::after {
-            content: '✦ AI Personalized'; position: absolute; top: 8px; right: 8px;
-            font-size: 9px; font-weight: 700; padding: 3px 8px; border-radius: 6px;
-            color: white; letter-spacing: 0.05em; z-index: 10;
+            content: '✦ AI Personalized';
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            font-size: 9px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 6px;
+            color: white;
+            letter-spacing: 0.05em;
+            z-index: 10;
         }
-        @keyframes entrance { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+        @keyframes entrance {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
 
         /* ── CHANGE LOG ── */
-        .change-list { display: flex; flex-direction: column; gap: 16px; }
+        .change-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
         .change-card {
-            background: var(--surface); border: 1px solid var(--border);
-            border-radius: 16px; padding: 22px; display: flex; gap: 16px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 22px;
+            display: flex;
+            gap: 16px;
             transition: border-color 0.2s;
         }
-        .change-card:hover { border-color: var(--border-2); }
+
+        .change-card:hover {
+            border-color: var(--border-2);
+        }
+
         .change-num {
-            width: 32px; height: 32px; border-radius: 50%; background: var(--accent-glow);
-            border: 1px solid var(--accent); color: var(--accent); font-size: 13px; font-weight: 700;
-            display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 4px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--accent-glow);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            font-size: 13px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 4px;
         }
-        .change-body { flex: 1; }
+
+        .change-body {
+            flex: 1;
+        }
+
         .change-principle {
-            display: inline-block; font-size: 10px; font-weight: 700; text-transform: uppercase;
-            padding: 3px 10px; border-radius: 20px; margin-bottom: 12px; background: var(--accent-glow);
-            color: var(--accent); border: 1px solid rgba(129,140,248,0.3);
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+            background: var(--accent-glow);
+            color: var(--accent);
+            border: 1px solid rgba(129, 140, 248, 0.3);
         }
-        .change-section-label { font-size: 12px; font-weight: 600; color: var(--muted); margin-bottom: 8px; }
-        .diff-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 14px; }
-        .diff-before { background: rgba(248,113,113,0.06); border: 1px solid rgba(248,113,113,0.15); border-radius: 8px; padding: 12px; }
-        .diff-after { background: rgba(52,211,153,0.06); border: 1px solid rgba(52,211,153,0.15); border-radius: 8px; padding: 12px; }
-        .diff-tag { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
-        .diff-before .diff-tag { color: var(--red); }
-        .diff-after .diff-tag { color: var(--green); }
-        .change-reason { font-size: 13px; color: var(--muted-2); margin-top: 10px; }
+
+        .change-section-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--muted);
+            margin-bottom: 8px;
+        }
+
+        .diff-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            font-size: 14px;
+        }
+
+        .diff-before {
+            background: rgba(248, 113, 113, 0.06);
+            border: 1px solid rgba(248, 113, 113, 0.15);
+            border-radius: 8px;
+            padding: 12px;
+        }
+
+        .diff-after {
+            background: rgba(52, 211, 153, 0.06);
+            border: 1px solid rgba(52, 211, 153, 0.15);
+            border-radius: 8px;
+            padding: 12px;
+        }
+
+        .diff-tag {
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 6px;
+        }
+
+        .diff-before .diff-tag {
+            color: var(--red);
+        }
+
+        .diff-after .diff-tag {
+            color: var(--green);
+        }
+
+        .change-reason {
+            font-size: 13px;
+            color: var(--muted-2);
+            margin-top: 10px;
+        }
 
         /* ── AD INTELLIGENCE ── */
-        .intel-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-        .intel-card {
-            background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 18px;
+        .intel-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
         }
-        .intel-key { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 8px; }
-        .intel-val { font-size: 15px; font-weight: 600; color: var(--text); }
-        .intel-val.bool-true { color: var(--yellow); }
-        .intel-val.bool-false { color: var(--muted-2); }
+
+        .intel-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 18px;
+        }
+
+        .intel-key {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--muted);
+            margin-bottom: 8px;
+        }
+
+        .intel-val {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .intel-val.bool-true {
+            color: var(--yellow);
+        }
+
+        .intel-val.bool-false {
+            color: var(--muted-2);
+        }
 
         /* ── AGENT TERMINAL ── */
         .terminal {
-            background: #000; border: 1px solid rgba(255,255,255,0.06); border-radius: 14px;
-            padding: 20px; font-family: 'Fira Code', 'Courier New', monospace; font-size: 12.5px;
-            max-height: 360px; overflow-y: auto; color: #ccc; line-height: 1.6;
+            background: #000;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 14px;
+            padding: 20px;
+            font-family: 'Fira Code', 'Courier New', monospace;
+            font-size: 12.5px;
+            max-height: 360px;
+            overflow-y: auto;
+            color: #ccc;
+            line-height: 1.6;
         }
-        .terminal::-webkit-scrollbar { width: 6px; }
-        .terminal::-webkit-scrollbar-track { background: transparent; }
-        .terminal::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 3px; }
-        .t-line { padding: 3px 0; display: flex; gap: 10px; align-items: baseline; }
-        .t-ts { color: #4b5563; font-size: 11px; flex-shrink: 0; }
-        .t-badge { font-size: 9px; font-weight: 700; padding: 1px 7px; border-radius: 4px; text-transform: uppercase; flex-shrink: 0; }
-        .t-badge.success { background: rgba(52,211,153,0.15); color: #34d399; }
-        .t-badge.start { background: rgba(251,191,36,0.15); color: #fbbf24; }
-        .t-badge.error { background: rgba(248,113,113,0.15); color: #f87171; }
-        .t-badge.call { background: rgba(129,140,248,0.15); color: #818cf8; }
-        .t-badge.cache-hit { background: rgba(52,211,153,0.2); color: #34d399; }
-        .t-badge.fallback { background: rgba(251,191,36,0.15); color: #fbbf24; }
-        .t-stage { color: #818cf8; font-weight: 700; min-width: 80px; flex-shrink: 0; }
-        .t-detail { color: #9ca3af; }
+
+        .terminal::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .terminal::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .terminal::-webkit-scrollbar-thumb {
+            background: var(--border-2);
+            border-radius: 3px;
+        }
+
+        .t-line {
+            padding: 3px 0;
+            display: flex;
+            gap: 10px;
+            align-items: baseline;
+        }
+
+        .t-ts {
+            color: #4b5563;
+            font-size: 11px;
+            flex-shrink: 0;
+        }
+
+        .t-badge {
+            font-size: 9px;
+            font-weight: 700;
+            padding: 1px 7px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            flex-shrink: 0;
+        }
+
+        .t-badge.success {
+            background: rgba(52, 211, 153, 0.15);
+            color: #34d399;
+        }
+
+        .t-badge.start {
+            background: rgba(251, 191, 36, 0.15);
+            color: #fbbf24;
+        }
+
+        .t-badge.error {
+            background: rgba(248, 113, 113, 0.15);
+            color: #f87171;
+        }
+
+        .t-badge.call {
+            background: rgba(129, 140, 248, 0.15);
+            color: #818cf8;
+        }
+
+        .t-badge.cache-hit {
+            background: rgba(52, 211, 153, 0.2);
+            color: #34d399;
+        }
+
+        .t-badge.fallback {
+            background: rgba(251, 191, 36, 0.15);
+            color: #fbbf24;
+        }
+
+        .t-stage {
+            color: #818cf8;
+            font-weight: 700;
+            min-width: 80px;
+            flex-shrink: 0;
+        }
+
+        .t-detail {
+            color: #9ca3af;
+        }
 
         /* ── CODE EXPORT ── */
-        .code-wrap { position: relative; }
-        .copy-btn {
-            position: absolute; top: 12px; right: 12px; background: var(--surface-2);
-            border: 1px solid var(--border-2); color: var(--muted-2); padding: 6px 14px;
-            border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer;
-            transition: all 0.2s; font-family: 'Inter', sans-serif;
+        .code-wrap {
+            position: relative;
         }
-        .copy-btn:hover { color: var(--text); border-color: var(--accent); }
+
+        .copy-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--surface-2);
+            border: 1px solid var(--border-2);
+            color: var(--muted-2);
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .copy-btn:hover {
+            color: var(--text);
+            border-color: var(--accent);
+        }
+
         pre {
-            background: #000; border: 1px solid rgba(255,255,255,0.05); border-radius: 14px;
-            padding: 28px; overflow-x: auto; font-family: 'Fira Code', 'Courier New', monospace;
-            font-size: 13px; line-height: 1.7; color: #e2e8f0;
+            background: #000;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 14px;
+            padding: 28px;
+            overflow-x: auto;
+            font-family: 'Fira Code', 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.7;
+            color: #e2e8f0;
         }
 
         /* ── PROVIDER STATUS ── */
         .provider-status {
-            background: var(--surface); border: 1px solid var(--border);
-            border-radius: 12px; padding: 16px 24px; margin-bottom: 24px;
-            display: flex; align-items: center; gap: 16px; font-size: 13px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px 24px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 13px;
         }
-        .ps-label { color: var(--muted); font-weight: 600; }
+
+        .ps-label {
+            color: var(--muted);
+            font-weight: 600;
+        }
 
         /* ── UTILITY ── */
-        .hidden { display: none !important; }
-        @keyframes fade-up { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
-        @keyframes fade-down { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: none; } }
-        .divider { height: 1px; background: var(--border); margin: 36px 0; }
+        .hidden {
+            display: none !important;
+        }
+
+        @keyframes fade-up {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        @keyframes fade-down {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        .divider {
+            height: 1px;
+            background: var(--border);
+            margin: 36px 0;
+        }
 
         /* ── TRY DEMO BUTTON ── */
         #tryDemo {
-            position: fixed; bottom: 28px; right: 28px; z-index: 200;
-            background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white;
-            border: none; padding: 13px 24px; border-radius: 50px; font-weight: 700;
-            font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 8px;
-            box-shadow: 0 8px 32px -4px rgba(99,102,241,0.6); transition: all 0.25s;
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            z-index: 200;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            border: none;
+            padding: 13px 24px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 8px 32px -4px rgba(99, 102, 241, 0.6);
+            transition: all 0.25s;
             font-family: 'Inter', sans-serif;
         }
-        #tryDemo:hover { transform: translateY(-3px); box-shadow: 0 16px 40px -4px rgba(99,102,241,0.7); }
+
+        #tryDemo:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 40px -4px rgba(99, 102, 241, 0.7);
+        }
 
         @media (max-width: 768px) {
-            .metrics-row { grid-template-columns: repeat(2, 1fr); }
-            .intel-grid { grid-template-columns: repeat(2, 1fr); }
-            .diff-row { grid-template-columns: 1fr; }
-            .lp-features { grid-template-columns: 1fr; padding: 0 20px 40px; }
-            .lp-hero { padding: 50px 20px 40px; }
-            .main-card { padding: 24px; }
-            .hero h1 { font-size: 36px; }
-            .provider-pills { display: none; }
+            .metrics-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .intel-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .diff-row {
+                grid-template-columns: 1fr;
+            }
+
+            .lp-features {
+                grid-template-columns: 1fr;
+                padding: 0 20px 40px;
+            }
+
+            .lp-hero {
+                padding: 50px 20px 40px;
+            }
+
+            .main-card {
+                padding: 24px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .provider-pills {
+                display: none;
+            }
         }
     </style>
 </head>
+
 <body>
 
-<div class="bg-orbs">
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-</div>
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
 
-<div class="page">
-    <!-- HEADER -->
-    <header class="site-header">
-        <div class="header-inner">
-            <div class="logo">
-                AdContinuity
-                <span class="logo-badge">PIPELINE V2.0</span>
-            </div>
-            <div class="provider-pills" id="providerPills">
-                <span class="provider-pill" id="pill-gemini"><span class="dot"></span>Gemini</span>
-                <span class="provider-pill" id="pill-groq"><span class="dot"></span>Groq</span>
-                <span class="provider-pill" id="pill-openrouter"><span class="dot"></span>OpenRouter</span>
-            </div>
-        </div>
-    </header>
-
-    <main class="container">
-        <!-- HERO -->
-        <section class="hero">
-            <div class="hero-tag">AI-Powered CRO Engine</div>
-            <h1>Your ad deserves a page<br>that <span>actually converts</span></h1>
-            <p class="hero-sub">Input any ad creative. Get a hyper-personalized landing page variant with zero wasted quota.</p>
-        </section>
-
-        <!-- INPUT FORM -->
-        <div class="main-card">
-            <div class="field">
-                <div class="field-label"><span class="num">1</span>Ad Creative</div>
-                <div class="tab-nav">
-                    <button class="tab-btn active" data-tab="describe">Description</button>
-                    <button class="tab-btn" data-tab="upload">Upload Image</button>
-                    <button class="tab-btn" data-tab="imgurl">Image URL</button>
+    <div class="page">
+        <!-- HEADER -->
+        <header class="site-header">
+            <div class="header-inner">
+                <div class="logo">
+                    AdContinuity
+                    <span class="logo-badge">PIPELINE V2.0</span>
                 </div>
-
-                <div id="pane-describe">
-                    <textarea class="input" id="adText" placeholder="e.g. Meditation app ad — Headline: 'Quiet your mind in 5 minutes'. Audience: stressed professionals. Offer: 30-day free trial."></textarea>
-                </div>
-                <div id="pane-upload" class="hidden">
-                    <div class="drop-zone" id="dropZone">
-                        <div class="drop-icon">🖼️</div>
-                        <div>Drop your ad image here or <strong>click to browse</strong></div>
-                        <div style="font-size:12px;margin-top:6px;color:var(--muted)">PNG, JPG, WEBP supported</div>
-                        <input type="file" id="adFile" hidden accept="image/*">
-                        <img id="adImageThumb">
-                    </div>
-                </div>
-                <div id="pane-imgurl" class="hidden">
-                    <input type="url" class="input" id="adUrl" placeholder="https://example.com/ad-image.jpg">
-                </div>
-                <div class="err-hint" id="errAd"></div>
-            </div>
-
-            <div class="field">
-                <div class="field-label"><span class="num">2</span>Landing Page URL</div>
-                <input type="url" class="input" id="lpUrl" placeholder="https://yoursite.com/landing (supports React/Next.js SPAs)">
-                <div class="err-hint" id="errUrl"></div>
-            </div>
-
-            <button class="cta-submit" id="runBtn">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                <span id="btnText">Orchestrate Personalization</span>
-            </button>
-
-            <!-- Progress tracker -->
-            <div class="tracker hidden" id="tracker">
-                <div class="track-step" id="ts1">
-                    <div class="track-dot">📡</div>
-                    <div class="track-label">Planner</div>
-                </div>
-                <div class="track-step" id="ts2">
-                    <div class="track-dot">🕸️</div>
-                    <div class="track-label">DeepFetch</div>
-                </div>
-                <div class="track-step" id="ts3">
-                    <div class="track-dot">✍️</div>
-                    <div class="track-label">Executor</div>
-                </div>
-                <div class="track-step" id="ts4">
-                    <div class="track-dot">✅</div>
-                    <div class="track-label">Verifier</div>
+                <div class="provider-pills" id="providerPills">
+                    <span class="provider-pill" id="pill-gemini"><span class="dot"></span>Gemini</span>
+                    <span class="provider-pill" id="pill-groq"><span class="dot"></span>Groq</span>
+                    <span class="provider-pill" id="pill-openrouter"><span class="dot"></span>OpenRouter</span>
                 </div>
             </div>
-        </div>
+        </header>
 
-        <!-- RESULTS -->
-        <div id="results">
-            <div id="resultBanner" class="result-banner"></div>
+        <main class="container">
+            <!-- HERO -->
+            <section class="hero">
+                <div class="hero-tag">AI-Powered CRO Engine</div>
+                <h1>Your ad deserves a page<br>that <span>actually converts</span></h1>
+                <p class="hero-sub">Input any ad creative. Get a hyper-personalized landing page variant with zero
+                    wasted quota.</p>
+            </section>
 
-            <!-- Metrics -->
-            <div class="metrics-row">
-                <div class="metric">
-                    <div class="metric-label">Baseline Match</div>
-                    <div class="metric-value" id="mBefore" style="color: var(--red)">—</div>
-                    <div class="metric-delta neutral">original</div>
-                </div>
-                <div class="metric">
-                    <div class="metric-label">Message Match</div>
-                    <div class="metric-value" id="mMatch" style="color: var(--green)">—</div>
-                    <div class="metric-delta up" id="mMatchDelta">+0pp</div>
-                </div>
-                <div class="metric">
-                    <div class="metric-label">Conversion Lift</div>
-                    <div class="metric-value" id="mConv" style="color: var(--accent)">—</div>
-                    <div class="metric-delta up" id="mConvDelta">+0pp</div>
-                </div>
-                <div class="metric">
-                    <div class="metric-label">Response Time</div>
-                    <div class="metric-value" id="mTime" style="color: var(--muted-2); font-size: 24px">—</div>
-                    <div class="metric-delta neutral">sec total</div>
-                </div>
-            </div>
-
-            <!-- Result Tabs -->
-            <div class="result-tabs">
-                <button class="r-tab active" data-pane="preview">🎨 Personalized Page</button>
-                <button class="r-tab" data-pane="changes">📋 Change Log (4)</button>
-                <button class="r-tab" data-pane="intel">🧠 Ad Intelligence</button>
-                <button class="r-tab" data-pane="terminal">⚡ Agent Logs</button>
-                <button class="r-tab" data-pane="export">🚀 Export</button>
-            </div>
-
-            <!-- Preview Tab -->
-            <div class="r-pane active" id="pane-preview">
-                <div class="preview-wrap">
-                    <div class="browser-chrome">
-                        <div class="b-dots">
-                            <div class="b-dot b-close"></div>
-                            <div class="b-dot b-min"></div>
-                            <div class="b-dot b-max"></div>
-                        </div>
-                        <div class="b-url" id="browserUrl">https://yoursite.com</div>
-                        <div class="before-after-toggle">
-                            <button class="ba-btn active" id="baPersonalized">Personalized</button>
-                            <button class="ba-btn" id="baOriginal">Original</button>
-                        </div>
+            <!-- INPUT FORM -->
+            <div class="main-card">
+                <div class="field">
+                    <div class="field-label"><span class="num">1</span>Ad Creative</div>
+                    <div class="tab-nav">
+                        <button class="tab-btn active" data-tab="describe">Description</button>
+                        <button class="tab-btn" data-tab="upload">Upload Image</button>
+                        <button class="tab-btn" data-tab="imgurl">Image URL</button>
                     </div>
 
-                    <!-- Personalized Page -->
-                    <div class="lp-frame" id="lpPersonalized">
-                        <nav class="lp-nav">
-                            <div class="lp-logo" id="lp-logo">Brand</div>
-                            <nav style="display:flex;gap:24px;font-size:13px;color:#6b7280">
-                                <span>Product</span><span>Pricing</span><span>Blog</span>
+                    <div id="pane-describe">
+                        <textarea class="input" id="adText"
+                            placeholder="e.g. Meditation app ad — Headline: 'Quiet your mind in 5 minutes'. Audience: stressed professionals. Offer: 30-day free trial."></textarea>
+                    </div>
+                    <div id="pane-upload" class="hidden">
+                        <div class="drop-zone" id="dropZone">
+                            <div class="drop-icon">🖼️</div>
+                            <div>Drop your ad image here or <strong>click to browse</strong></div>
+                            <div style="font-size:12px;margin-top:6px;color:var(--muted)">PNG, JPG, WEBP supported</div>
+                            <input type="file" id="adFile" hidden accept="image/*">
+                            <img id="adImageThumb">
+                        </div>
+                    </div>
+                    <div id="pane-imgurl" class="hidden">
+                        <input type="url" class="input" id="adUrl" placeholder="https://example.com/ad-image.jpg">
+                    </div>
+                    <div class="err-hint" id="errAd"></div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label"><span class="num">2</span>Landing Page URL</div>
+                    <input type="url" class="input" id="lpUrl"
+                        placeholder="https://yoursite.com/landing (supports React/Next.js SPAs)">
+                    <div class="err-hint" id="errUrl"></div>
+                </div>
+
+                <button class="cta-submit" id="runBtn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.5">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                        <path d="M2 17l10 5 10-5M2 12l10 5 10-5" />
+                    </svg>
+                    <span id="btnText">Orchestrate Personalization</span>
+                </button>
+
+                <!-- Progress tracker -->
+                <div class="tracker hidden" id="tracker">
+                    <div class="track-step" id="ts1">
+                        <div class="track-dot">📡</div>
+                        <div class="track-label">Planner</div>
+                    </div>
+                    <div class="track-step" id="ts2">
+                        <div class="track-dot">🕸️</div>
+                        <div class="track-label">DeepFetch</div>
+                    </div>
+                    <div class="track-step" id="ts3">
+                        <div class="track-dot">✍️</div>
+                        <div class="track-label">Executor</div>
+                    </div>
+                    <div class="track-step" id="ts4">
+                        <div class="track-dot">✅</div>
+                        <div class="track-label">Verifier</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RESULTS -->
+            <div id="results">
+                <div id="resultBanner" class="result-banner"></div>
+
+                <!-- Metrics -->
+                <div class="metrics-row">
+                    <div class="metric">
+                        <div class="metric-label">Baseline Match</div>
+                        <div class="metric-value" id="mBefore" style="color: var(--red)">—</div>
+                        <div class="metric-delta neutral">original</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">Message Match</div>
+                        <div class="metric-value" id="mMatch" style="color: var(--green)">—</div>
+                        <div class="metric-delta up" id="mMatchDelta">+0pp</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">Conversion Lift</div>
+                        <div class="metric-value" id="mConv" style="color: var(--accent)">—</div>
+                        <div class="metric-delta up" id="mConvDelta">+0pp</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">Response Time</div>
+                        <div class="metric-value" id="mTime" style="color: var(--muted-2); font-size: 24px">—</div>
+                        <div class="metric-delta neutral">sec total</div>
+                    </div>
+                </div>
+
+                <!-- Result Tabs -->
+                <div class="result-tabs">
+                    <button class="r-tab active" data-pane="preview">🎨 Personalized Page</button>
+                    <button class="r-tab" data-pane="changes">📋 Change Log (4)</button>
+                    <button class="r-tab" data-pane="intel">🧠 Ad Intelligence</button>
+                    <button class="r-tab" data-pane="terminal">⚡ Agent Logs</button>
+                    <button class="r-tab" data-pane="export">🚀 Export</button>
+                </div>
+
+                <!-- Preview Tab -->
+                <div class="r-pane active" id="pane-preview">
+                    <div class="preview-wrap">
+                        <div class="browser-chrome">
+                            <div class="b-dots">
+                                <div class="b-dot b-close"></div>
+                                <div class="b-dot b-min"></div>
+                                <div class="b-dot b-max"></div>
+                            </div>
+                            <div class="b-url" id="browserUrl">https://yoursite.com</div>
+                            <div class="before-after-toggle">
+                                <button class="ba-btn active" id="baPersonalized">Personalized</button>
+                                <button class="ba-btn" id="baOriginal">Original</button>
+                            </div>
+                        </div>
+
+                        <!-- Personalized Page -->
+                        <div class="lp-frame" id="lpPersonalized">
+                            <nav class="lp-nav">
+                                <div class="lp-logo" id="lp-logo">Brand</div>
+                                <nav style="display:flex;gap:24px;font-size:13px;color:#6b7280">
+                                    <span>Product</span><span>Pricing</span><span>Blog</span>
+                                </nav>
+                                <button class="lp-nav-cta" id="lp-nav-cta">Get Started</button>
                             </nav>
-                            <button class="lp-nav-cta" id="lp-nav-cta">Get Started</button>
-                        </nav>
-                        <div class="lp-hero personalized-glow" id="hero-section" style="--glow: rgba(99,102,241,0.15)">
-                            <div class="lp-h1" id="lp-h1">Your Personalized Headline</div>
-                            <div class="lp-subhead" id="lp-subhead">Your personalized subheadline will appear here.</div>
-                            <button class="lp-cta-btn" id="lp-cta">Get Started</button>
-                            <p class="lp-trust" id="lp-trust">✦ No credit card required &nbsp;·&nbsp; Cancel anytime</p>
+                            <div class="lp-hero personalized-glow" id="hero-section"
+                                style="--glow: rgba(99,102,241,0.15)">
+                                <div class="lp-h1" id="lp-h1">Your Personalized Headline</div>
+                                <div class="lp-subhead" id="lp-subhead">Your personalized subheadline will appear here.
+                                </div>
+                                <button class="lp-cta-btn" id="lp-cta">Get Started</button>
+                                <p class="lp-trust" id="lp-trust">✦ No credit card required &nbsp;·&nbsp; Cancel anytime
+                                </p>
+                            </div>
+                            <div class="lp-features" id="lp-features">
+                                <!-- JS-filled -->
+                            </div>
+                            <div class="lp-social personalized-glow" id="social-section">
+                                <div class="lp-quote" id="lp-quote">"This transformed how I work every single day."
+                                </div>
+                                <div class="lp-quote-author" id="lp-author">— Happy Customer ⭐⭐⭐⭐⭐</div>
+                            </div>
                         </div>
-                        <div class="lp-features" id="lp-features">
-                            <!-- JS-filled -->
-                        </div>
-                        <div class="lp-social personalized-glow" id="social-section">
-                            <div class="lp-quote" id="lp-quote">"This transformed how I work every single day."</div>
-                            <div class="lp-quote-author" id="lp-author">— Happy Customer ⭐⭐⭐⭐⭐</div>
-                        </div>
-                    </div>
 
-                    <!-- Original Page (hidden by default) -->
-                    <div class="lp-frame hidden" id="lpOriginal">
-                        <div style="display:flex;align-items:center;justify-content:center;height:400px;color:#9ca3af;font-size:15px">
-                            <div style="text-align:center">
-                                <div style="font-size:48px;margin-bottom:16px">📄</div>
-                                <div>Original page content extracted during scrape.</div>
-                                <div class="lp-quote" id="orig-headline" style="margin-top:20px;max-width:400px"></div>
-                                <div style="color:#6b7280;margin-top:8px;font-size:13px" id="orig-sub"></div>
-                                <div style="margin-top:16px;font-weight:700;color:#374151" id="orig-cta"></div>
+                        <!-- Original Page (hidden by default) -->
+                        <div class="lp-frame hidden" id="lpOriginal">
+                            <div
+                                style="display:flex;align-items:center;justify-content:center;height:400px;color:#9ca3af;font-size:15px">
+                                <div style="text-align:center">
+                                    <div style="font-size:48px;margin-bottom:16px">📄</div>
+                                    <div>Original page content extracted during scrape.</div>
+                                    <div class="lp-quote" id="orig-headline" style="margin-top:20px;max-width:400px">
+                                    </div>
+                                    <div style="color:#6b7280;margin-top:8px;font-size:13px" id="orig-sub"></div>
+                                    <div style="margin-top:16px;font-weight:700;color:#374151" id="orig-cta"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
+
+                    <!-- Reasoning box below preview -->
+                    <div
+                        style="margin-top:20px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px;">
+                        <div
+                            style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:10px">
+                            💡 CRO Reasoning</div>
+                        <p id="reasonText" style="font-size:14px;color:var(--muted-2);line-height:1.7"></p>
+                    </div>
                 </div>
 
-                <!-- Reasoning box below preview -->
-                <div style="margin-top:20px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px;">
-                    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:10px">💡 CRO Reasoning</div>
-                    <p id="reasonText" style="font-size:14px;color:var(--muted-2);line-height:1.7"></p>
+                <!-- Changes Tab -->
+                <div class="r-pane" id="pane-changes">
+                    <div class="change-list" id="changeList"></div>
+                </div>
+
+                <!-- Intelligence Tab -->
+                <div class="r-pane" id="pane-intel">
+                    <div class="intel-grid" id="intelGrid"></div>
+                </div>
+
+                <!-- Terminal Tab -->
+                <div class="r-pane" id="pane-terminal">
+                    <div class="terminal" id="agentTerminal">
+                        <div style="color:var(--muted);font-style:italic">Waiting for agent logs...</div>
+                    </div>
+                </div>
+
+                <!-- Export Tab -->
+                <div class="r-pane" id="pane-export">
+                    <div class="code-wrap">
+                        <button class="copy-btn" onclick="copyCode()">Copy</button>
+                        <pre id="exportCode"></pre>
+                    </div>
+                    <div
+                        style="margin-top:16px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;font-size:13px;color:var(--muted-2)">
+                        <strong style="color:var(--text)">How to use:</strong> The preview JSON above contains the
+                        personalized content for each section.
+                        Inject these values into your CMS (Webflow, Framer, WordPress) or use the HTML snippets in your
+                        landing page builder.
+                    </div>
                 </div>
             </div>
+        </main>
 
-            <!-- Changes Tab -->
-            <div class="r-pane" id="pane-changes">
-                <div class="change-list" id="changeList"></div>
-            </div>
-
-            <!-- Intelligence Tab -->
-            <div class="r-pane" id="pane-intel">
-                <div class="intel-grid" id="intelGrid"></div>
-            </div>
-
-            <!-- Terminal Tab -->
-            <div class="r-pane" id="pane-terminal">
-                <div class="terminal" id="agentTerminal">
-                    <div style="color:var(--muted);font-style:italic">Waiting for agent logs...</div>
+        <!-- ── FOOTER ── -->
+        <footer class="site-footer"
+            style="padding: 40px 0; border-top: 1px solid var(--border); margin-top: 80px; text-align: center; color: var(--muted-2);">
+            <div class="container" style="display: flex; flex-direction: column; align-items: center; gap: 12px;">
+                <div class="logo" style="font-size: 18px; filter: grayscale(1) opacity(0.7);">AdContinuity</div>
+                <div style="font-size: 13px;">Enterprise-grade AI personalization engine. 100% serverless, private, and
+                    secure.</div>
+                <div style="font-size: 12px; opacity: 0.6; margin-top: 20px;">
+                    © 2026 AdContinuity. Built with semantic AI pipelines.
                 </div>
             </div>
+        </footer>
+    </div>
+    <button id="tryDemo">✦ Run Demo (Calm.com)</button>
 
-            <!-- Export Tab -->
-            <div class="r-pane" id="pane-export">
-                <div class="code-wrap">
-                    <button class="copy-btn" onclick="copyCode()">Copy</button>
-                    <pre id="exportCode"></pre>
-                </div>
-                <div style="margin-top:16px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;font-size:13px;color:var(--muted-2)">
-                    <strong style="color:var(--text)">How to use:</strong> The preview JSON above contains the personalized content for each section. 
-                    Inject these values into your CMS (Webflow, Framer, WordPress) or use the HTML snippets in your landing page builder.
-                </div>
-            </div>
-        </div>
-    </main>
+    <script>
+        const API = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+            ? 'http://localhost:3001'
+            : 'https://b26033cf-52ab-488c-9ae1-b2938931633e.railway.app'; // <--- REPLACE THIS AFTER DEPLOYING BACKEND
+        let adImageBase64 = null;
+        let currentPreviewMode = 'personalized';
 
-    <!-- ── FOOTER ── -->
-    <footer class="site-footer" style="padding: 40px 0; border-top: 1px solid var(--border); margin-top: 80px; text-align: center; color: var(--muted-2);">
-        <div class="container" style="display: flex; flex-direction: column; align-items: center; gap: 12px;">
-            <div class="logo" style="font-size: 18px; filter: grayscale(1) opacity(0.7);">AdContinuity</div>
-            <div style="font-size: 13px;">Enterprise-grade AI personalization engine. 100% serverless, private, and secure.</div>
-            <div style="font-size: 12px; opacity: 0.6; margin-top: 20px;">
-                © 2026 AdContinuity. Built with semantic AI pipelines.
-            </div>
-        </div>
-    </footer>
-</div>
-<button id="tryDemo">✦ Run Demo (Calm.com)</button>
+        // ── Tab switching (input) ──────────────────────────────────────
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                ['describe', 'upload', 'imgurl'].forEach(id => document.getElementById('pane-' + id).classList.add('hidden'));
+                document.getElementById('pane-' + btn.dataset.tab).classList.remove('hidden');
 
-<script>
-const API = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
-    ? 'http://localhost:3001' 
-    : 'https://your-backend-url.railway.app'; // <--- REPLACE THIS AFTER DEPLOYING BACKEND
-let adImageBase64 = null;
-let currentPreviewMode = 'personalized';
+                // Clear other inputs to prevent contamination
+                if (btn.dataset.tab !== 'describe') document.getElementById('adText').value = '';
+                if (btn.dataset.tab !== 'upload') {
+                    adImageBase64 = null;
+                    document.getElementById('fileInfo').classList.add('hidden');
+                    document.getElementById('adFile').value = '';
+                }
+                if (btn.dataset.tab !== 'imgurl') document.getElementById('adUrl').value = '';
+            });
+        });
 
-// ── Tab switching (input) ──────────────────────────────────────
-document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        ['describe','upload','imgurl'].forEach(id => document.getElementById('pane-'+id).classList.add('hidden'));
-        document.getElementById('pane-'+btn.dataset.tab).classList.remove('hidden');
+        // ── Result tab switching ───────────────────────────────────────
+        document.querySelectorAll('.r-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.r-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.r-pane').forEach(p => p.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById('pane-' + tab.dataset.pane).classList.add('active');
+            });
+        });
 
-        // Clear other inputs to prevent contamination
-        if (btn.dataset.tab !== 'describe') document.getElementById('adText').value = '';
-        if (btn.dataset.tab !== 'upload') {
-            adImageBase64 = null;
-            document.getElementById('fileInfo').classList.add('hidden');
-            document.getElementById('adFile').value = '';
+        // ── Drop zone ─────────────────────────────────────────────────
+        const dropZone = document.getElementById('dropZone');
+        const adFile = document.getElementById('adFile');
+        dropZone.addEventListener('click', () => adFile.click());
+        dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('over'); });
+        dropZone.addEventListener('dragleave', () => dropZone.classList.remove('over'));
+        dropZone.addEventListener('drop', e => { e.preventDefault(); dropZone.classList.remove('over'); if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]); });
+        adFile.addEventListener('change', e => { if (e.target.files[0]) handleFile(e.target.files[0]); });
+
+        function handleFile(file) {
+            const reader = new FileReader();
+            reader.onload = e => {
+                adImageBase64 = e.target.result;
+                const thumb = document.getElementById('adImageThumb');
+                thumb.src = adImageBase64;
+                thumb.style.display = 'block';
+                dropZone.querySelector('div.drop-icon').textContent = '✅';
+            };
+            reader.readAsDataURL(file);
         }
-        if (btn.dataset.tab !== 'imgurl') document.getElementById('adUrl').value = '';
-    });
-});
 
-// ── Result tab switching ───────────────────────────────────────
-document.querySelectorAll('.r-tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-        document.querySelectorAll('.r-tab').forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.r-pane').forEach(p => p.classList.remove('active'));
-        tab.classList.add('active');
-        document.getElementById('pane-' + tab.dataset.pane).classList.add('active');
-    });
-});
+        // ── Before/After toggle ───────────────────────────────────────
+        document.getElementById('baPersonalized').addEventListener('click', () => {
+            document.getElementById('baPersonalized').classList.add('active');
+            document.getElementById('baOriginal').classList.remove('active');
+            document.getElementById('lpPersonalized').classList.remove('hidden');
+            document.getElementById('lpOriginal').classList.add('hidden');
+        });
+        document.getElementById('baOriginal').addEventListener('click', () => {
+            document.getElementById('baOriginal').classList.add('active');
+            document.getElementById('baPersonalized').classList.remove('active');
+            document.getElementById('lpOriginal').classList.remove('hidden');
+            document.getElementById('lpPersonalized').classList.add('hidden');
+        });
 
-// ── Drop zone ─────────────────────────────────────────────────
-const dropZone = document.getElementById('dropZone');
-const adFile = document.getElementById('adFile');
-dropZone.addEventListener('click', () => adFile.click());
-dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('over'); });
-dropZone.addEventListener('dragleave', () => dropZone.classList.remove('over'));
-dropZone.addEventListener('drop', e => { e.preventDefault(); dropZone.classList.remove('over'); if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]); });
-adFile.addEventListener('change', e => { if (e.target.files[0]) handleFile(e.target.files[0]); });
+        // ── Provider status ───────────────────────────────────────────
+        async function refreshProviderStatus() {
+            try {
+                const r = await fetch(API + '/health');
+                const d = await r.json();
+                (d.providers || []).forEach(p => {
+                    const pill = document.getElementById('pill-' + p.id);
+                    if (!pill) return;
+                    pill.classList.remove('active', 'warn');
+                    const dot = pill.querySelector('.dot');
+                    if (p.status === 'active') {
+                        pill.classList.add('active');
+                        dot.style.background = 'var(--green)';
+                        dot.title = 'Active';
+                    } else if (p.status === 'invalid_key') {
+                        dot.style.background = 'var(--red)';
+                        pill.title = 'Invalid API key — fix in .env';
+                    } else if (p.status === 'cooling') {
+                        dot.style.background = 'var(--yellow)';
+                        pill.title = `Cooling down ${Math.round(p.cooldownRemainingMs / 1000)}s`;
+                    } else {
+                        dot.style.background = 'var(--muted)';
+                        pill.title = 'Not configured';
+                    }
+                });
+            } catch { }
+        }
+        refreshProviderStatus();
 
-function handleFile(file) {
-    const reader = new FileReader();
-    reader.onload = e => {
-        adImageBase64 = e.target.result;
-        const thumb = document.getElementById('adImageThumb');
-        thumb.src = adImageBase64;
-        thumb.style.display = 'block';
-        dropZone.querySelector('div.drop-icon').textContent = '✅';
-    };
-    reader.readAsDataURL(file);
-}
+        // ── Demo ──────────────────────────────────────────────────────
+        document.getElementById('tryDemo').addEventListener('click', () => {
+            document.querySelector('[data-tab="describe"]').click();
+            document.getElementById('adText').value = "Calm app sleep ad. Headline: 'Fall asleep faster, wake up refreshed'. Audience: stressed parents and executives. Offer: 7-day free trial. Visual: dark blue room, soft light, peaceful.";
+            document.getElementById('lpUrl').value = 'https://calm.com';
+            document.getElementById('runBtn').click();
+        });
 
-// ── Before/After toggle ───────────────────────────────────────
-document.getElementById('baPersonalized').addEventListener('click', () => {
-    document.getElementById('baPersonalized').classList.add('active');
-    document.getElementById('baOriginal').classList.remove('active');
-    document.getElementById('lpPersonalized').classList.remove('hidden');
-    document.getElementById('lpOriginal').classList.add('hidden');
-});
-document.getElementById('baOriginal').addEventListener('click', () => {
-    document.getElementById('baOriginal').classList.add('active');
-    document.getElementById('baPersonalized').classList.remove('active');
-    document.getElementById('lpOriginal').classList.remove('hidden');
-    document.getElementById('lpPersonalized').classList.add('hidden');
-});
+        // ── Main Submit ───────────────────────────────────────────────
+        document.getElementById('runBtn').addEventListener('click', async () => {
+            const lpUrl = document.getElementById('lpUrl').value.trim();
+            const adDescription = document.getElementById('adText').value.trim();
+            const adUrl = document.getElementById('adUrl').value.trim();
 
-// ── Provider status ───────────────────────────────────────────
-async function refreshProviderStatus() {
-    try {
-        const r = await fetch(API + '/health');
-        const d = await r.json();
-        (d.providers || []).forEach(p => {
-            const pill = document.getElementById('pill-' + p.id);
-            if (!pill) return;
-            pill.classList.remove('active', 'warn');
-            const dot = pill.querySelector('.dot');
-            if (p.status === 'active') {
-                pill.classList.add('active');
-                dot.style.background = 'var(--green)';
-                dot.title = 'Active';
-            } else if (p.status === 'invalid_key') {
-                dot.style.background = 'var(--red)';
-                pill.title = 'Invalid API key — fix in .env';
-            } else if (p.status === 'cooling') {
-                dot.style.background = 'var(--yellow)';
-                pill.title = `Cooling down ${Math.round(p.cooldownRemainingMs/1000)}s`;
-            } else {
-                dot.style.background = 'var(--muted)';
-                pill.title = 'Not configured';
+            document.getElementById('errAd').textContent = '';
+            document.getElementById('errUrl').textContent = '';
+
+            if (!adImageBase64 && !adUrl && !adDescription) {
+                document.getElementById('errAd').textContent = 'Please provide your ad creative.';
+                return;
+            }
+            if (!lpUrl) {
+                document.getElementById('errUrl').textContent = 'Landing page URL is required.';
+                return;
+            }
+
+            setLoading(true);
+
+            try {
+                const resp = await fetch(API + '/api/personalize', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ adImageBase64, adUrl, adDescription, landingPageUrl: lpUrl }),
+                });
+                const data = await resp.json();
+                if (!resp.ok) throw new Error(data.error || `Server error ${resp.status}`);
+                renderResults(data, lpUrl);
+            } catch (err) {
+                setLoading(false);
+                showError(err.message);
             }
         });
-    } catch {}
-}
-refreshProviderStatus();
 
-// ── Demo ──────────────────────────────────────────────────────
-document.getElementById('tryDemo').addEventListener('click', () => {
-    document.querySelector('[data-tab="describe"]').click();
-    document.getElementById('adText').value = "Calm app sleep ad. Headline: 'Fall asleep faster, wake up refreshed'. Audience: stressed parents and executives. Offer: 7-day free trial. Visual: dark blue room, soft light, peaceful.";
-    document.getElementById('lpUrl').value = 'https://calm.com';
-    document.getElementById('runBtn').click();
-});
+        function showError(msg) {
+            // Remove existing error toast
+            document.getElementById('errToast')?.remove();
 
-// ── Main Submit ───────────────────────────────────────────────
-document.getElementById('runBtn').addEventListener('click', async () => {
-    const lpUrl = document.getElementById('lpUrl').value.trim();
-    const adDescription = document.getElementById('adText').value.trim();
-    const adUrl = document.getElementById('adUrl').value.trim();
-
-    document.getElementById('errAd').textContent = '';
-    document.getElementById('errUrl').textContent = '';
-
-    if (!adImageBase64 && !adUrl && !adDescription) {
-        document.getElementById('errAd').textContent = 'Please provide your ad creative.';
-        return;
-    }
-    if (!lpUrl) {
-        document.getElementById('errUrl').textContent = 'Landing page URL is required.';
-        return;
-    }
-
-    setLoading(true);
-
-    try {
-        const resp = await fetch(API + '/api/personalize', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ adImageBase64, adUrl, adDescription, landingPageUrl: lpUrl }),
-        });
-        const data = await resp.json();
-        if (!resp.ok) throw new Error(data.error || `Server error ${resp.status}`);
-        renderResults(data, lpUrl);
-    } catch (err) {
-        setLoading(false);
-        showError(err.message);
-    }
-});
-
-function showError(msg) {
-    // Remove existing error toast
-    document.getElementById('errToast')?.remove();
-
-    const toast = document.createElement('div');
-    toast.id = 'errToast';
-    toast.style.cssText = `
+            const toast = document.createElement('div');
+            toast.id = 'errToast';
+            toast.style.cssText = `
         background: rgba(248,113,113,0.1); border: 1px solid rgba(248,113,113,0.3);
         color: #f87171; border-radius: 12px; padding: 16px 20px; margin-bottom: 20px;
         font-size: 14px; font-weight: 500; display: flex; align-items: flex-start; gap: 12px;
     `;
 
-    // Translate technical errors into friendly messages
-    let friendly = msg;
-    let advice = '';
-    if (msg.includes('401') || msg.includes('invalid_key') || msg.includes('Unauthorized')) {
-        friendly = 'API key rejected (401 Unauthorized)';
-        advice = 'Check your .env file — one of your keys is invalid.';
-    } else if (msg.includes('429') || msg.includes('quota') || msg.includes('rate limit')) {
-        friendly = 'All providers hit their rate limits';
-        advice = 'Wait 60 seconds and try again. Or use the Description tab (text tasks use Groq, not Gemini).';
-    } else if (msg.includes('404')) {
-        friendly = 'API model not found (404)';
-        advice = 'OpenRouter model slugs may need updating. The server will auto-retry with fallback models.';
-    } else if (msg.includes('vision') || msg.includes('image')) {
-        friendly = 'Vision processing failed';
-        advice = 'Gemini is needed for image analysis. Check your GEMINI_API_KEY in .env.';
-    } else if (msg.includes('fetch') || msg.includes('network') || msg.includes('ECONNREFUSED')) {
-        friendly = 'Cannot reach backend server';
-        advice = 'Make sure `npm run dev` is running in the backend folder.';
-    }
+            // Translate technical errors into friendly messages
+            let friendly = msg;
+            let advice = '';
+            if (msg.includes('401') || msg.includes('invalid_key') || msg.includes('Unauthorized')) {
+                friendly = 'API key rejected (401 Unauthorized)';
+                advice = 'Check your .env file — one of your keys is invalid.';
+            } else if (msg.includes('429') || msg.includes('quota') || msg.includes('rate limit')) {
+                friendly = 'All providers hit their rate limits';
+                advice = 'Wait 60 seconds and try again. Or use the Description tab (text tasks use Groq, not Gemini).';
+            } else if (msg.includes('404')) {
+                friendly = 'API model not found (404)';
+                advice = 'OpenRouter model slugs may need updating. The server will auto-retry with fallback models.';
+            } else if (msg.includes('vision') || msg.includes('image')) {
+                friendly = 'Vision processing failed';
+                advice = 'Gemini is needed for image analysis. Check your GEMINI_API_KEY in .env.';
+            } else if (msg.includes('fetch') || msg.includes('network') || msg.includes('ECONNREFUSED')) {
+                friendly = 'Cannot reach backend server';
+                advice = 'Make sure `npm run dev` is running in the backend folder.';
+            }
 
-    toast.innerHTML = `
+            toast.innerHTML = `
         <span style="font-size:20px;flex-shrink:0">⚠</span>
         <div>
             <strong>${friendly}</strong>
@@ -889,130 +1724,130 @@ function showError(msg) {
         </div>
     `;
 
-    // Insert before results section
-    document.getElementById('results').before(toast);
-    toast.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    setTimeout(() => toast.remove(), 15000);
-}
+            // Insert before results section
+            document.getElementById('results').before(toast);
+            toast.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            setTimeout(() => toast.remove(), 15000);
+        }
 
-function setLoading(on) {
-    const btn = document.getElementById('runBtn');
-    const tracker = document.getElementById('tracker');
-    btn.disabled = on;
-    tracker.classList.toggle('hidden', !on);
-    document.getElementById('results').style.display = 'none';
+        function setLoading(on) {
+            const btn = document.getElementById('runBtn');
+            const tracker = document.getElementById('tracker');
+            btn.disabled = on;
+            tracker.classList.toggle('hidden', !on);
+            document.getElementById('results').style.display = 'none';
 
-    if (on) {
-        document.getElementById('btnText').textContent = 'Orchestrating…';
-        const spinner = document.createElement('div');
-        spinner.className = 'spinner'; spinner.id = 'spinner';
-        btn.insertBefore(spinner, btn.firstChild);
+            if (on) {
+                document.getElementById('btnText').textContent = 'Orchestrating…';
+                const spinner = document.createElement('div');
+                spinner.className = 'spinner'; spinner.id = 'spinner';
+                btn.insertBefore(spinner, btn.firstChild);
 
-        let step = 1;
-        clearInterval(window._timerTrack);
-        window._timerTrack = setInterval(() => {
-            for (let i = 1; i <= 4; i++) {
-                const el = document.getElementById('ts'+i);
-                el.className = 'track-step' + (i < step ? ' done' : i === step ? ' active' : '');
+                let step = 1;
+                clearInterval(window._timerTrack);
+                window._timerTrack = setInterval(() => {
+                    for (let i = 1; i <= 4; i++) {
+                        const el = document.getElementById('ts' + i);
+                        el.className = 'track-step' + (i < step ? ' done' : i === step ? ' active' : '');
+                    }
+                    step = step >= 4 ? 4 : step + 1;
+                }, 1400);
+            } else {
+                document.getElementById('btnText').textContent = 'Orchestrate Personalization';
+                const s = document.getElementById('spinner');
+                if (s) s.remove();
+                clearInterval(window._timerTrack);
+                for (let i = 1; i <= 4; i++) document.getElementById('ts' + i).className = 'track-step done';
             }
-            step = step >= 4 ? 4 : step + 1;
-        }, 1400);
-    } else {
-        document.getElementById('btnText').textContent = 'Orchestrate Personalization';
-        const s = document.getElementById('spinner');
-        if (s) s.remove();
-        clearInterval(window._timerTrack);
-        for (let i = 1; i <= 4; i++) document.getElementById('ts'+i).className = 'track-step done';
-    }
-}
+        }
 
-function renderResults(data, url) {
-    setLoading(false);
-    document.getElementById('results').style.display = 'block';
-    document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        function renderResults(data, url) {
+            setLoading(false);
+            document.getElementById('results').style.display = 'block';
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-    const { cro, preview, changes, adAnalysis, reasoning, htmlSnippets, logs, status, metadata } = data;
+            const { cro, preview, changes, adAnalysis, reasoning, htmlSnippets, logs, status, metadata } = data;
 
-    // Banner
-    const banner = document.getElementById('resultBanner');
-    banner.className = 'result-banner ' + (status === 'success' ? 'success' : 'partial');
-    banner.innerHTML = status === 'success'
-        ? '✦ Perfect message continuity established — live page content was personalized.'
-        : '⚠ Using industry best-practice fallback (page could not be fully scraped).';
+            // Banner
+            const banner = document.getElementById('resultBanner');
+            banner.className = 'result-banner ' + (status === 'success' ? 'success' : 'partial');
+            banner.innerHTML = status === 'success'
+                ? '✦ Perfect message continuity established — live page content was personalized.'
+                : '⚠ Using industry best-practice fallback (page could not be fully scraped).';
 
-    // Metrics
-    animateNum('mBefore', cro.messageMatch, '%');
-    animateNum('mMatch', cro.personalizedMessageMatch, '%');
-    animateNum('mConv', cro.personalizedConversionPotential, '%');
-    document.getElementById('mMatchDelta').textContent = `+${cro.personalizedMessageMatch - cro.messageMatch}pp`;
-    document.getElementById('mConvDelta').textContent = `+${cro.personalizedConversionPotential - cro.conversionPotential}pp`;
-    if (metadata?.executionMs) document.getElementById('mTime').textContent = (metadata.executionMs / 1000).toFixed(2);
-    else document.getElementById('mTime').textContent = '—';
+            // Metrics
+            animateNum('mBefore', cro.messageMatch, '%');
+            animateNum('mMatch', cro.personalizedMessageMatch, '%');
+            animateNum('mConv', cro.personalizedConversionPotential, '%');
+            document.getElementById('mMatchDelta').textContent = `+${cro.personalizedMessageMatch - cro.messageMatch}pp`;
+            document.getElementById('mConvDelta').textContent = `+${cro.personalizedConversionPotential - cro.conversionPotential}pp`;
+            if (metadata?.executionMs) document.getElementById('mTime').textContent = (metadata.executionMs / 1000).toFixed(2);
+            else document.getElementById('mTime').textContent = '—';
 
-    // Change log tab label
-    document.querySelector('[data-pane="changes"]').textContent = `📋 Change Log (${(changes||[]).length})`;
+            // Change log tab label
+            document.querySelector('[data-pane="changes"]').textContent = `📋 Change Log (${(changes || []).length})`;
 
-    // ── Browser / Preview ───────────────────────────────────────
-    document.getElementById('browserUrl').textContent = url;
+            // ── Browser / Preview ───────────────────────────────────────
+            document.getElementById('browserUrl').textContent = url;
 
-    const accentColor = preview.accentColor || '#6366f1';
+            const accentColor = preview.accentColor || '#6366f1';
 
-    // Style nav CTA
-    document.getElementById('lp-nav-cta').style.background = accentColor;
-    document.getElementById('lp-nav-cta').textContent = preview.ctaText || 'Get Started';
-    document.getElementById('lp-logo').textContent = new URL(url).hostname.replace('www.','').split('.')[0].charAt(0).toUpperCase()
-        + new URL(url).hostname.replace('www.','').split('.')[0].slice(1);
+            // Style nav CTA
+            document.getElementById('lp-nav-cta').style.background = accentColor;
+            document.getElementById('lp-nav-cta').textContent = preview.ctaText || 'Get Started';
+            document.getElementById('lp-logo').textContent = new URL(url).hostname.replace('www.', '').split('.')[0].charAt(0).toUpperCase()
+                + new URL(url).hostname.replace('www.', '').split('.')[0].slice(1);
 
-    // Hero
-    document.getElementById('lp-h1').textContent = preview.heroHeadline;
-    document.getElementById('lp-subhead').textContent = preview.heroSubhead;
-    const ctaBtn = document.getElementById('lp-cta');
-    ctaBtn.textContent = preview.ctaText;
-    ctaBtn.style.background = accentColor;
+            // Hero
+            document.getElementById('lp-h1').textContent = preview.heroHeadline;
+            document.getElementById('lp-subhead').textContent = preview.heroSubhead;
+            const ctaBtn = document.getElementById('lp-cta');
+            ctaBtn.textContent = preview.ctaText;
+            ctaBtn.style.background = accentColor;
 
-    // Glow hero with brand color
-    document.getElementById('hero-section').style.background = `radial-gradient(circle at 50% 0%, ${accentColor}18 0%, transparent 60%)`;
+            // Glow hero with brand color
+            document.getElementById('hero-section').style.background = `radial-gradient(circle at 50% 0%, ${accentColor}18 0%, transparent 60%)`;
 
-    // Social proof
-    document.getElementById('lp-quote').textContent = `"${preview.socialProof}"`;
+            // Social proof
+            document.getElementById('lp-quote').textContent = `"${preview.socialProof}"`;
 
-    // Features
-    const feats = document.getElementById('lp-features');
-    feats.innerHTML = '';
-    (preview.features || []).forEach((f, i) => {
-        feats.innerHTML += `
-            <div class="lp-feat personalized-glow" style="animation-delay:${i*0.1}s">
+            // Features
+            const feats = document.getElementById('lp-features');
+            feats.innerHTML = '';
+            (preview.features || []).forEach((f, i) => {
+                feats.innerHTML += `
+            <div class="lp-feat personalized-glow" style="animation-delay:${i * 0.1}s">
                 <div class="personalized-glow" style="display:none"></div>
                 <h3>${f.title}</h3>
                 <p>${f.description}</p>
             </div>`;
-    });
+            });
 
-    // Apply personalized-glow pseudo color 
-    document.querySelectorAll('.lp-feat, .lp-hero, .lp-social').forEach(el => {
-        el.style.setProperty('--glow-color', accentColor);
-    });
-    // Set glow badge color via CSS
-    const style = document.createElement('style');
-    style.textContent = `.personalized-glow::after { background: ${accentColor}; }`;
-    document.head.appendChild(style);
+            // Apply personalized-glow pseudo color 
+            document.querySelectorAll('.lp-feat, .lp-hero, .lp-social').forEach(el => {
+                el.style.setProperty('--glow-color', accentColor);
+            });
+            // Set glow badge color via CSS
+            const style = document.createElement('style');
+            style.textContent = `.personalized-glow::after { background: ${accentColor}; }`;
+            document.head.appendChild(style);
 
-    // Original page (before)
-    const origChange = (changes||[]).find(c => c.sectionId === 'hero');
-    document.getElementById('orig-headline').textContent = `"${origChange?.original || 'Original headline'}"`;
-    document.getElementById('orig-sub').textContent = 'Original subheadline from scraped page';
-    document.getElementById('orig-cta').textContent = 'Original CTA button';
+            // Original page (before)
+            const origChange = (changes || []).find(c => c.sectionId === 'hero');
+            document.getElementById('orig-headline').textContent = `"${origChange?.original || 'Original headline'}"`;
+            document.getElementById('orig-sub').textContent = 'Original subheadline from scraped page';
+            document.getElementById('orig-cta').textContent = 'Original CTA button';
 
-    // Reasoning
-    document.getElementById('reasonText').textContent = reasoning;
+            // Reasoning
+            document.getElementById('reasonText').textContent = reasoning;
 
-    // ── Change Log ──────────────────────────────────────────────
-    const cl = document.getElementById('changeList');
-    cl.innerHTML = '';
-    (changes||[]).forEach((c, i) => {
-        cl.innerHTML += `
+            // ── Change Log ──────────────────────────────────────────────
+            const cl = document.getElementById('changeList');
+            cl.innerHTML = '';
+            (changes || []).forEach((c, i) => {
+                cl.innerHTML += `
             <div class="change-card">
-                <div class="change-num">${i+1}</div>
+                <div class="change-num">${i + 1}</div>
                 <div class="change-body">
                     <span class="change-principle">${c.croPrinciple}</span>
                     <div class="change-section-label">Section: ${c.sectionName || c.sectionId}</div>
@@ -1029,134 +1864,135 @@ function renderResults(data, url) {
                     <div class="change-reason">💡 ${c.reason || ''}</div>
                 </div>
             </div>`;
-    });
+            });
 
-    // ── Ad Intelligence ─────────────────────────────────────────
-    const ig = document.getElementById('intelGrid');
-    ig.innerHTML = '';
-    Object.entries(adAnalysis || {}).forEach(([k, v]) => {
-        const isB = typeof v === 'boolean';
-        ig.innerHTML += `
+            // ── Ad Intelligence ─────────────────────────────────────────
+            const ig = document.getElementById('intelGrid');
+            ig.innerHTML = '';
+            Object.entries(adAnalysis || {}).forEach(([k, v]) => {
+                const isB = typeof v === 'boolean';
+                ig.innerHTML += `
             <div class="intel-card">
                 <div class="intel-key">${k}</div>
                 <div class="intel-val ${isB ? (v ? 'bool-true' : 'bool-false') : ''}">${isB ? (v ? '✓ Yes' : '✗ No') : v}</div>
             </div>`;
-    });
+            });
 
-    // ── Agent Terminal ───────────────────────────────────────────
-    const term = document.getElementById('agentTerminal');
-    if (logs && logs.length > 0) {
-        term.innerHTML = '';
-        logs.forEach(log => {
-            const ts = log.timestamp?.split('T')[1]?.split('.')[0] || '';
-            term.innerHTML += `
+            // ── Agent Terminal ───────────────────────────────────────────
+            const term = document.getElementById('agentTerminal');
+            if (logs && logs.length > 0) {
+                term.innerHTML = '';
+                logs.forEach(log => {
+                    const ts = log.timestamp?.split('T')[1]?.split('.')[0] || '';
+                    term.innerHTML += `
                 <div class="t-line">
                     <span class="t-ts">${ts}</span>
                     <span class="t-badge ${log.status}">${log.status}</span>
                     <span class="t-stage">${log.stage}</span>
                     <span class="t-detail">${log.detail || ''}</span>
                 </div>`;
-        });
-        term.scrollTop = term.scrollHeight;
-    } else {
-        term.innerHTML = '<div style="color:var(--muted)">No logs received (demo mode)</div>';
-    }
+                });
+                term.scrollTop = term.scrollHeight;
+            } else {
+                term.innerHTML = '<div style="color:var(--muted)">No logs received (demo mode)</div>';
+            }
 
-    // ── Export ───────────────────────────────────────────────────
-    const exportData = {
-        generatedBy: 'Troopod AI Personalizer',
-        timestamp: new Date().toISOString(),
-        landingPageUrl: url,
-        accentColor,
-        personalized: {
-            heroHeadline: preview.heroHeadline,
-            heroSubhead: preview.heroSubhead,
-            ctaText: preview.ctaText,
-            features: preview.features,
-            socialProof: preview.socialProof,
-        },
-        htmlSnippets: htmlSnippets || {},
-        croScores: cro,
-    };
-    document.getElementById('exportCode').textContent = JSON.stringify(exportData, null, 2);
+            // ── Export ───────────────────────────────────────────────────
+            const exportData = {
+                generatedBy: 'Troopod AI Personalizer',
+                timestamp: new Date().toISOString(),
+                landingPageUrl: url,
+                accentColor,
+                personalized: {
+                    heroHeadline: preview.heroHeadline,
+                    heroSubhead: preview.heroSubhead,
+                    ctaText: preview.ctaText,
+                    features: preview.features,
+                    socialProof: preview.socialProof,
+                },
+                htmlSnippets: htmlSnippets || {},
+                croScores: cro,
+            };
+            document.getElementById('exportCode').textContent = JSON.stringify(exportData, null, 2);
 
-    refreshProviderStatus();
-}
+            refreshProviderStatus();
+        }
 
-function animateNum(id, target, suffix = '') {
-    const el = document.getElementById(id);
-    let start = 0;
-    const dur = 800;
-    const t0 = performance.now();
-    function frame(now) {
-        const p = Math.min((now - t0) / dur, 1);
-        const ease = 1 - Math.pow(1 - p, 3);
-        el.textContent = Math.round(start + (target - start) * ease) + suffix;
-        if (p < 1) requestAnimationFrame(frame);
-    }
-    requestAnimationFrame(frame);
-}
+        function animateNum(id, target, suffix = '') {
+            const el = document.getElementById(id);
+            let start = 0;
+            const dur = 800;
+            const t0 = performance.now();
+            function frame(now) {
+                const p = Math.min((now - t0) / dur, 1);
+                const ease = 1 - Math.pow(1 - p, 3);
+                el.textContent = Math.round(start + (target - start) * ease) + suffix;
+                if (p < 1) requestAnimationFrame(frame);
+            }
+            requestAnimationFrame(frame);
+        }
 
-function copyCode() {
-    const code = document.getElementById('exportCode').textContent;
-    navigator.clipboard.writeText(code).then(() => {
-        const btn = document.querySelector('.copy-btn');
-        btn.textContent = 'Copied!';
-        setTimeout(() => btn.textContent = 'Copy', 2000);
-    });
-}
+        function copyCode() {
+            const code = document.getElementById('exportCode').textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = 'Copied!';
+                setTimeout(() => btn.textContent = 'Copy', 2000);
+            });
+        }
 
-function getDemoData() {
-    return {
-        status: 'success',
-        logs: [
-            { timestamp: new Date().toISOString(), stage: 'ROUTER', status: 'cache-hit', detail: '[planner] Serving from disk cache — 0 API tokens consumed' },
-            { timestamp: new Date().toISOString(), stage: 'TOOL', status: 'success', detail: 'Scraped: "Peaceful Sleep Starts Here"' },
-            { timestamp: new Date().toISOString(), stage: 'ROUTER', status: 'call', detail: '[executor] → Groq (Llama 3.3 70B)' },
-            { timestamp: new Date().toISOString(), stage: 'EXECUTOR', status: 'success', detail: 'generated (via groq)' },
-            { timestamp: new Date().toISOString(), stage: 'VERIFIER', status: 'success', detail: '0 total adjustments' },
-        ],
-        adAnalysis: {
-            offer: '7-Day Free Sleep Trial',
-            headline: 'Fall asleep faster, wake up refreshed',
-            audience: 'Stressed parents & executives 30-55',
-            tone: 'calm',
-            cta: 'Start Free Trial',
-            urgency: false,
-            visualStyle: 'Dark ambient, soft blue lighting, peaceful',
-            keyMessage: 'Better sleep is possible in 7 days',
-            emotionalHook: 'Relief from exhaustion',
-        },
-        cro: { messageMatch: 38, conversionPotential: 52, personalizedMessageMatch: 94, personalizedConversionPotential: 89 },
-        preview: {
-            heroHeadline: 'Fall asleep faster. Finally wake up like yourself.',
-            heroSubhead: 'Join 2 million executives and parents who reclaimed their nights with Calm. Your first 7 days are completely free.',
-            ctaText: 'Start My Free 7 Days',
-            features: [
-                { title: 'Sleep Specifically for You', description: 'Curated programs designed around the mental load of busy professionals and parents.' },
-                { title: 'Expert Sleep Science', description: 'Techniques built by neuroscientists to quiet an overactive mind in minutes.' },
-                { title: 'Works on Night One', description: 'Most users report measurably better sleep quality within their first session.' },
-                { title: 'No Commitment Needed', description: 'Try everything for 7 days. Cancel in seconds if it\'s not right for you.' },
-            ],
-            socialProof: 'I went from lying awake at 2am with work anxieties to sleeping through the night. Worth every penny.',
-            pageTheme: 'calm',
-            accentColor: '#4f46e5',
-        },
-        changes: [
-            { sectionId: 'hero', sectionName: 'Hero Headline', croPrinciple: 'Message Match', original: 'Peaceful Sleep Starts Here', new: 'Fall asleep faster. Finally wake up like yourself.', reason: 'Directly mirrors the ad\'s "Fall asleep faster" hook and adds "finally" to amplify the relief emotion.' },
-            { sectionId: 'cta', sectionName: 'CTA Button', croPrinciple: 'CTA Alignment', original: 'Get Started', new: 'Start My Free 7 Days', reason: 'Matches the ad\'s "7-day free trial" offer exactly, reducing friction and setting clear expectations.' },
-            { sectionId: 'feature1', sectionName: 'Feature 1', croPrinciple: 'Benefit Sequencing', original: 'Guided Meditations', new: 'Sleep Specifically for You', reason: 'Reframes from a generic product feature to an audience-specific benefit for busy professionals.' },
-            { sectionId: 'social', sectionName: 'Social Proof', croPrinciple: 'Social Proof Targeting', original: 'I love this app!', new: 'I went from lying awake at 2am with work anxieties to sleeping through the night.', reason: 'Specific testimonial mentioning "work anxieties" directly validates the audience\'s fear and outcome.' },
-        ],
-        reasoning: 'The core strategy was message continuity — every element on the landing page now directly echoes the ad\'s emotional hook (exhaustion → relief). The headline mirrors the ad copy verbatim, the CTA preserves the "7 days free" offer, and the social proof was selected to validate the specific fear of the target audience (work anxiety keeping them awake).',
-        htmlSnippets: {
-            hero: '<section class="hero"><h1>Fall asleep faster. Finally wake up like yourself.</h1><p>Join 2 million executives and parents...</p><a class="cta">Start My Free 7 Days</a></section>',
-            cta: '<a class="cta-btn">Start My Free 7 Days</a>',
-            socialProof: '<blockquote>I went from lying awake at 2am with work anxieties to sleeping through the night.</blockquote>',
-        },
-        metadata: { executionMs: 3821, fetchSuccess: true, correctionRan: false },
-    };
-}
-</script>
+        function getDemoData() {
+            return {
+                status: 'success',
+                logs: [
+                    { timestamp: new Date().toISOString(), stage: 'ROUTER', status: 'cache-hit', detail: '[planner] Serving from disk cache — 0 API tokens consumed' },
+                    { timestamp: new Date().toISOString(), stage: 'TOOL', status: 'success', detail: 'Scraped: "Peaceful Sleep Starts Here"' },
+                    { timestamp: new Date().toISOString(), stage: 'ROUTER', status: 'call', detail: '[executor] → Groq (Llama 3.3 70B)' },
+                    { timestamp: new Date().toISOString(), stage: 'EXECUTOR', status: 'success', detail: 'generated (via groq)' },
+                    { timestamp: new Date().toISOString(), stage: 'VERIFIER', status: 'success', detail: '0 total adjustments' },
+                ],
+                adAnalysis: {
+                    offer: '7-Day Free Sleep Trial',
+                    headline: 'Fall asleep faster, wake up refreshed',
+                    audience: 'Stressed parents & executives 30-55',
+                    tone: 'calm',
+                    cta: 'Start Free Trial',
+                    urgency: false,
+                    visualStyle: 'Dark ambient, soft blue lighting, peaceful',
+                    keyMessage: 'Better sleep is possible in 7 days',
+                    emotionalHook: 'Relief from exhaustion',
+                },
+                cro: { messageMatch: 38, conversionPotential: 52, personalizedMessageMatch: 94, personalizedConversionPotential: 89 },
+                preview: {
+                    heroHeadline: 'Fall asleep faster. Finally wake up like yourself.',
+                    heroSubhead: 'Join 2 million executives and parents who reclaimed their nights with Calm. Your first 7 days are completely free.',
+                    ctaText: 'Start My Free 7 Days',
+                    features: [
+                        { title: 'Sleep Specifically for You', description: 'Curated programs designed around the mental load of busy professionals and parents.' },
+                        { title: 'Expert Sleep Science', description: 'Techniques built by neuroscientists to quiet an overactive mind in minutes.' },
+                        { title: 'Works on Night One', description: 'Most users report measurably better sleep quality within their first session.' },
+                        { title: 'No Commitment Needed', description: 'Try everything for 7 days. Cancel in seconds if it\'s not right for you.' },
+                    ],
+                    socialProof: 'I went from lying awake at 2am with work anxieties to sleeping through the night. Worth every penny.',
+                    pageTheme: 'calm',
+                    accentColor: '#4f46e5',
+                },
+                changes: [
+                    { sectionId: 'hero', sectionName: 'Hero Headline', croPrinciple: 'Message Match', original: 'Peaceful Sleep Starts Here', new: 'Fall asleep faster. Finally wake up like yourself.', reason: 'Directly mirrors the ad\'s "Fall asleep faster" hook and adds "finally" to amplify the relief emotion.' },
+                    { sectionId: 'cta', sectionName: 'CTA Button', croPrinciple: 'CTA Alignment', original: 'Get Started', new: 'Start My Free 7 Days', reason: 'Matches the ad\'s "7-day free trial" offer exactly, reducing friction and setting clear expectations.' },
+                    { sectionId: 'feature1', sectionName: 'Feature 1', croPrinciple: 'Benefit Sequencing', original: 'Guided Meditations', new: 'Sleep Specifically for You', reason: 'Reframes from a generic product feature to an audience-specific benefit for busy professionals.' },
+                    { sectionId: 'social', sectionName: 'Social Proof', croPrinciple: 'Social Proof Targeting', original: 'I love this app!', new: 'I went from lying awake at 2am with work anxieties to sleeping through the night.', reason: 'Specific testimonial mentioning "work anxieties" directly validates the audience\'s fear and outcome.' },
+                ],
+                reasoning: 'The core strategy was message continuity — every element on the landing page now directly echoes the ad\'s emotional hook (exhaustion → relief). The headline mirrors the ad copy verbatim, the CTA preserves the "7 days free" offer, and the social proof was selected to validate the specific fear of the target audience (work anxiety keeping them awake).',
+                htmlSnippets: {
+                    hero: '<section class="hero"><h1>Fall asleep faster. Finally wake up like yourself.</h1><p>Join 2 million executives and parents...</p><a class="cta">Start My Free 7 Days</a></section>',
+                    cta: '<a class="cta-btn">Start My Free 7 Days</a>',
+                    socialProof: '<blockquote>I went from lying awake at 2am with work anxieties to sleeping through the night.</blockquote>',
+                },
+                metadata: { executionMs: 3821, fetchSuccess: true, correctionRan: false },
+            };
+        }
+    </script>
 </body>
+
 </html>
