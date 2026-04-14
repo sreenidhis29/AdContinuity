@@ -1,0 +1,16 @@
+# Dependencies
+backend/node_modules/
+node_modules/
+
+# Environment
+backend/.env
+.env
+
+# Cache & Temporary
+backend/.cache/
+.cache/
+.temp/
+
+# OS Files
+.DS_Store
+Thumbs.db
