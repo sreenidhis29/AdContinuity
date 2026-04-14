@@ -15,10 +15,12 @@ RUN npx playwright install chromium
 # Copy the source code
 COPY backend/ .
 
+# Sync with Railway's default Port
+ENV PORT=8080
+EXPOSE 8080
+
 # Production Config
-ENV PORT=3001
 ENV NODE_ENV=production
-EXPOSE 3001
 
 # Clean up
 RUN rm -rf /root/.cache
