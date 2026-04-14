@@ -107,7 +107,7 @@ async function scrapeWithPlaywright(url, traceId = null) {
   logStage('TOOL', 'sub-task', null, 'Escalating to Playwright (headless browser)...', traceId);
   let browser;
   try {
-    const { chromium } = require('playwright-chromium');
+    const { chromium } = require('playwright');
     browser = await chromium.launch({ headless: true });
     const context = await browser.newContext({
       userAgent: USER_AGENT,
